@@ -1,3 +1,72 @@
+    <script type="text/javascript" src="js/glMatrix-0.9.5.min.js"></script>
+    <script type="text/javascript" src="js/glpainter.js"></script>
+    <script type="text/javascript" src="js/shaders.js"></script>
+    <script type="text/javascript" src="js/canvaspainter.js"></script>
+    <script type="text/javascript" src="jquery/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="jquery/js/jquery-ui-1.8.20.custom.min.js"></script>
+
+    <!-- External jsdicom-lib -->
+    <script type="text/javascript" src="jsdicom-lib/src/dcmdict.js"></script>
+    <script type="text/javascript" src="jsdicom-lib/src/binutils.js"></script>
+    <script type="text/javascript" src="jsdicom-lib/src/dcmfile.js"></script>
+    <script type="text/javascript" src="jsdicom-lib/src/dicomparser.js"></script>
+    <script type="text/javascript" src="jsdicom-lib/src/transfersyntax.js"></script>
+    <script type="text/javascript" src="jsdicom-lib/src/qr.js"></script>
+
+    <script type="text/javascript" src="js/GLU.js"></script>
+    <script type="text/javascript" src="js/cluts.js"></script>
+    <script type="text/javascript" src="wb/main.js"></script>
+    <script type="text/javascript" src="js/tools.js"></script>
+    <script type="text/javascript" src="js/utilities.js"></script>
+    <script type="text/javascript" src="js/dcmseries.js"></script>
+    <script type="text/javascript" src="js/presentation.js"></script>
+<script type="text/javascript">
+	var app = new DcmApp('view-area');
+	
+	
+	
+	var ready;
+	ready = function() {
+	app.init();
+	app.load_url("http://x.babymri.org/?53320924&.dcm", 0 , 1);
+	
+	
+	
+	var dropZone = document.getElementById('filebox');
+    dropZone.addEventListener('dragover', handleDragOver, false);
+    dropZone.addEventListener('drop', handleFileSelect, false);
+	webGLStart();
+	};
+
+	$(document).ready(ready);
+	$(document).on('page:load', ready);
+	
+	</script>
+   <div id="view-area" style="height:800px">
+        
+    </div>
+
+    <div id="viewer" class="box">
+        <h2>Viewer</h2>
+		
+        <div id="viewer-bar">
+            <div id="view-metadata" class="tool-button">Metadata</div>
+            <div id="test-scroll" class="tool-button">Slide through</div>
+            <select id="clut-select">
+                <optgroup label="CLUT">
+                </optgroup>
+            </select>
+            <select id="window-presets">
+                <optgroup label="Window presets">
+                </optgroup>
+            </select>
+            <div id="button-bar-horz">
+                <div id="butt-reset" class="tool-button">Reset</div>
+            </div>
+        </div>
+
+
+	
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -22,7 +91,7 @@
 
 <p>
   <strong>Liink:</strong>
-  <%= link_to @examination %>
+  <%= link_to @examination.current %>
 </p>
 
 <%= link_to 'Edit', edit_examination_path(@examination) %> |

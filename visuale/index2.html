@@ -152,43 +152,14 @@
 		
         <div id="viewer-bar">
             <div id="view-metadata" class="tool-button">Metadata</div>
-            <div id="test-scroll" class="tool-button">Slide through</div>
             <select id="clut-select">
                 <optgroup label="CLUT">
                 </optgroup>
             </select>
-            <select id="window-presets">
-                <optgroup label="Window presets">
-                </optgroup>
-            </select>
-            <div id="button-bar-horz">
-                <div id="butt-reset" class="tool-button">Reset</div>
-            </div>
         </div>
 
 
 
-<input type="file" id="files" name="files[]" multiple />
-<output id="list"></output>
-<output id="list2" name = "test" ></output>
-<script>
-  function handleFileSelect(evt) {
-    var files = evt.target.files; // FileList object
-
-    // files is a FileList of File objects. List some properties.
-    var output = [];
-	 output.push('<h> Filename             Size                 Location </h>');
-    for (var i = 0, f; f = files[i]; i++) {
-      output.push('<li>', escape(f.name), ' ',  f.size, ' bytes ', f. ' </li>');
-    }
-    document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>';
-	app.load_files(files);
-	//app.load_url('http://x.babymri.org/?53320924&.dcm', 0 , 1);
-  }
-
-  document.getElementById('files').addEventListener('change', handleFileSelect, false);
-</script>
- 
 
         <table id="metadata-table" width="100%">
             <thead>
