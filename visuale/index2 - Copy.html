@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>DICOM</title>
+
+    <script type="text/javascript" src="js/glMatrix-0.9.5.min.js"></script>
+    <script type="text/javascript" src="js/glpainter.js"></script>
+    <script type="text/javascript" src="js/shaders.js"></script>
+    <script type="text/javascript" src="js/canvaspainter.js"></script>
+    <script type="text/javascript" src="jquery/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="jquery/js/jquery-ui-1.8.20.custom.min.js"></script>
+
+    <!-- External jsdicom-lib -->
+    <script type="text/javascript" src="jsdicom-lib/src/dcmdict.js"></script>
+    <script type="text/javascript" src="jsdicom-lib/src/binutils.js"></script>
+    <script type="text/javascript" src="jsdicom-lib/src/dcmfile.js"></script>
+    <script type="text/javascript" src="jsdicom-lib/src/dicomparser.js"></script>
+    <script type="text/javascript" src="jsdicom-lib/src/transfersyntax.js"></script>
+    <script type="text/javascript" src="jsdicom-lib/src/qr.js"></script>
+
+    <script type="text/javascript" src="js/GLU.js"></script>
+    <script type="text/javascript" src="js/cluts.js"></script>
+    <script type="text/javascript" src="wb/main.js"></script>
+    <script type="text/javascript" src="js/tools.js"></script>
+    <script type="text/javascript" src="js/utilities.js"></script>
+    <script type="text/javascript" src="js/dcmseries.js"></script>
+    <script type="text/javascript" src="js/presentation.js"></script>
+<script type="text/javascript">
+var app = new DcmApp('view-area');
+var ready;
+ready = function() {
+
+
+
+app.init();
+app.load_url("http://x.babymri.org/?53320924&.dcm", 0 , 1);
+app.curr_file_idx = 0;
+app.draw_image();
+for(clut in cluts) {
+$("#clut-select optgroup").append($("<option>").val(clut).text(clut));
+}
+$("#clut-select").change(function() {
+app.set_clut($(this).val());
+});
+//webGLStart();
+
+ $("#view-metadata").click(function() {
+            app.fill_metadata_table();
+            $("#metadata-dialog").dialog({
+                modal: true,
+                width: 600,
+                button: {
+                    'Ok': function() {
+                        $(this).dialog('close');
+                    }
+                }
+            });
+        });
+
+
+
+};
+$(document).ready(ready);
+$(document).on('page:load', ready);
+</script>
+
+
+<body>
+ <div id="view-area" style="height:600px">
+</div>
+
+<div id="viewer" class="box">
+<h2>Viewer</h2>
+
+<div id="viewer-bar">
+<div id="view-metadata" class="tool-button">Metadata</div>
+<select id="clut-select">
+<optgroup label="CLUT">
+</optgroup>
+</select>
+</div>
+
+	<table id="metadata-table" width="100%">
+		<thead>
+			<tr>
+				<td width="15%">Tag</td>
+				<td width="40%">Name</td>
+				<td width="35%">Value</td>
+			</tr>
+		</thead>
+	<tbody>
+	</tbody>
+</table>
+</div> 
+
+</body>
+</html> 
+</html>
