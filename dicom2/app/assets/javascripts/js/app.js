@@ -151,6 +151,10 @@ DcmApp.prototype.load_file = function(file, index, file_count) {
     reader.readAsArrayBuffer(file);
 }
 
+//Fill in this method
+DcmApp.prototype.load_from_mongo = function(tag, db) {
+}
+
 DcmApp.prototype.load_url = function(url, index, file_count) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
